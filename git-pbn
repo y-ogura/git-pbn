@@ -7,9 +7,9 @@ usage_exit() {
 
 create_branch() {
 	if [ $1 ]; then
-		git checkout -b $(git config test.name)-$2
+		git checkout -b $(git config git-pbn.name)-$2
 	else
-		git branch -a $(git config test.name)-$2
+		git branch -a $(git config git-pbn.name)-$2
 	fi
 	exit 1
 }
