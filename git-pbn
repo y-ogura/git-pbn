@@ -1,0 +1,34 @@
+#!/bin/bash
+
+usage_exit() {
+	echo "Usage: $0 [-c] [-h]" 1>&2
+	exit 1
+}
+
+create_branch() {
+	if [ $1 ]; then
+		git checkout -b $(git config test.name)-$2
+	else
+		git branch -a $(git config test.name)-$2
+	fi
+	exit 1
+}
+
+# check argments
+if [ -n "$1" ]; then
+	case $1 in
+		-h)
+			usage_exit
+			;;
+		-c)
+			if [ -n "$2" ]; then
+				create_branch 1 $2
+			else
+				usage_exit
+			fi
+			;;
+		*)
+			create_branch 0 $1
+			;;
+	esac
+fi
